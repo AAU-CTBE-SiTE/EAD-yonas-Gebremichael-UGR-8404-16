@@ -2,36 +2,38 @@ package com.craft;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Data
 @ToString
+@Component
 public class Student {
+
     private int id;
     private String name;
     private int age;
+
     private Address address;
-    private List<Subject> subjects; // <-- List of Subject beans
+    private List<Subject> subjects;
 
-    public Student() {
-    }
-
-    public void setAddress(Address address) {
+    @Autowired
+    public Student(Address address, List<Subject> subjects) {
+        this.id = 101;
+        this.name = "Yoya";
+        this.age = 20;
         this.address = address;
-    }
-
-    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
     public void getDetails() {
-        System.out.println("Student Name: " + this.name);
-        int index = 1;
-        if (subjects != null) {
-            for (Subject subject : subjects) {
-                System.out.println("Subject " + index + ": " + subject.getSubjectName());
-                index++;
-            }
+        System.out.println("Student Name: " + name);
+        System.out.println("Address: " + address);
+
+        for (Subject subject : subjects) {
+            System.out.println("Subject: " + subject.getSubjectName());
         }
     }
 }

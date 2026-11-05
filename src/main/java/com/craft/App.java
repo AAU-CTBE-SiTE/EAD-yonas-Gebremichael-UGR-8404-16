@@ -1,11 +1,12 @@
 package com.craft;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("beansConfig.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         // Ask for the bean twice
         Student student1 = context.getBean("student", Student.class);
